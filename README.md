@@ -1,0 +1,2 @@
+# Earthquakes-Map
+Earthquakes Map
