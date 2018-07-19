@@ -76,17 +76,20 @@ d3.json(techtonicUrl, function(faultLinesData){
         collapsed:true
     }).addTo(map);
 
-var legend = L.control({position: "bottomright"});
-
+var legend = L.control({position: "bottomleft"});
+//map = map %>% addLegend("bottomright", 
+//  colors =c("#FFC125",  "#FFC125", "#8A4117", "#7D0552", "#571B7E"),
+//  labels= c("less", "","","","", "more"),
+//  title= "(e.g.) % voting UKIP at GE2015"
+//  opacity = 1)
 legend.onAdd = function(map) {
     
-    var div = L.DomUtil.create("div", "info legend"), 
-        grades = [0, 1, 2, 3, 4, 5,],
+    var div = L.DomUtil.create("div", "info legend");
+        grades = [0, 1, 2, 3, 4, 5];
         labels = [];
-
+		div.innerHTML='<div><b>Legend</b></div>';
         for  (var i =0; i < grades.length; i++) {
-            div.innerHTML +=
-                '<i style="background:' + getColor(grades[i] +1) + '"></i> ' 
+            div.innerHTML += '<i style="background:' + getColor(grades[i] +1) + '; color:' + getColor(grades[i] +1) + '"> ... </i> ' 
                 + grades[i] + (grades[i +1] ? `&ndash;` + grades[i + 1] + '<br>' : '+');
         }
 
@@ -95,14 +98,15 @@ legend.onAdd = function(map) {
 
 legend.addTo(map);
 
-function getColor(d) {
-    return  d > 5 ? "darkblue":
-            d > 4 ? "darkgreen":
-            d > 3 ? "red":
-            d > 2 ? "orange":
-            d > 1 ? "yellow" :
-                    "lightyellow";
-} 
+
+        function getColor(d) {
+            return  d > 5 ? "#FF0000":
+                    d > 4 ? "#FF6600":
+                    d > 3 ? "#FFCC00":
+                    d > 2 ? "#CCFF00":
+                    d > 1 ? "#66FF00" :
+                            "#00FF00";
+        };
 
     })
 }
